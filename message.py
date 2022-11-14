@@ -62,7 +62,7 @@ class Message():
         '''
         await asyncio.sleep(0.5)
         self.nodes = []
-        nodes = await self.sendSurvey(['all'], do='discovery', survey='', timeout=100)
+        nodes = await self.sendSurvey(['all'], do='discovery', survey='', timeout=500)
         for node in nodes:
             self.nodes.append(node['who'])
         return self.nodes
@@ -86,11 +86,10 @@ class Message():
         log.info('Send a survey ({}) to {} and wait for reply ...'.format(self.survey, self.ips))
         # survey will be finished if all expect nodes replied
         # or timeout if some nodes not replied
-        if self.survey['who'][0] == 'all':
+        if self.survey['who'][0] == 'all' and self.nodes:
             expect_nodes = set(self.nodes)
         else:
             expect_nodes = set(self.survey['who'])
-        node = set()
 
         # wait a little while for connecting
         self.surveyor.survey_time = timeout
@@ -103,14 +102,13 @@ class Message():
                 log.info('Got reply {} ...'.format(result))
                 result = json.loads(result.decode())
                 reply.append(result)
-                log.info('Got reply {} ...'.format(result))
-                node.add(result['who'])
+                expect_nodes.discard(result['who'])
                 # got all responses
-                if node == expect_nodes:
+                if not expect_nodes:
                     log.info('All done, survey finished')
                     break
             except Timeout:
-                log.info('Survey is over')
+                log.info(f'Survey is over, no reply within time {timeout}')
                 break
         return reply
     
@@ -132,9 +130,11 @@ class Message():
                 reply = await self.handler.process_survey(survey)
                 self.reply['detail'] = reply
                 log.info(f'reply: {self.reply}')
-                await self.responder.asend(json.dumps(self.reply).encode())
             else:
+                self.reply['do'] = 'ignore'
+                self.reply['detail'] = 'Not for me'
                 log.warning('Ignore this survey since it is not for me')
+            await self.responder.asend(json.dumps(self.reply).encode())
 
 async def main(mode):
     msg = Message(mode=mode)
