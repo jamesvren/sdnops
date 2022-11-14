@@ -1,0 +1,10 @@
+## How to generate password:
+python3 -c "from webs.login import get_password_hash; print(get_password_hash('your password'))"
+
+## How to build docker
+docker-compose binary is arch special, so you have to put the correct binary here before docker build.
+
+docker build . --target sdnops-base -t sdnops-base
+
+## Then you can build image based on previous stage without build base again
+docker build . --target sdnops -t sdnops

@@ -1,0 +1,14 @@
+<svg class="icon" width="361" height="153" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <g stroke="null" id="svg_8">
+   <ellipse stroke="#000" stroke-width="25" stroke-dasharray="2,2" ry="60" rx="165.5" id="svg_2" cy="76.00001" cx="180.49999" fill="#fff"/>
+   <text stroke="#000" transform="matrix(3.64435 0 0 2.76749 -868.508 -437.893)" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="194.9485" x="262.48237" stroke-width="0" fill="#000000">SDN</text>
+   <line stroke="#000" id="svg_4" y2="96.00001" x2="101.18835" y1="99.13726" x1="48.00829" fill="none"/>
+   <line stroke="#000" id="svg_5" y2="24.62746" x2="180.04154" y1="55.21569" x1="130.52907" fill="none"/>
+   <line stroke="#000" id="svg_6" y2="125.80393" x2="185.54292" y1="99.92158" x1="214.88364" fill="none"/>
+   <line stroke="#000" id="svg_7" y2="27.76471" x2="229.554" y1="48.94118" x1="264.39611" fill="none"/>
+  </g>
+ </g>
+
+</svg>

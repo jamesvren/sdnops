@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block css %}
+    {{ super() }}
+    <link href="{{ url_for('static', path='/css/signin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<main class="form-signin text-center">
+    <form action="/token" enctype="multipart/form-data" method="post">
+        <img class="mb-4" src="{{ url_for('static', path='/font/sdn.svg') }}" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">登录 SDN Ops</h1>
+        <div class="form-floating">
+            <input type="username" class="form-control" id="floatingInput" name="username" placeholder="User" required />
+            <label for="floatingInput">用户名</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required />
+            <label for="floatingPassword">密码</label>
+        </div>
+        <p class="mb-3 text-muted">Have a good time :)</p>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">登录</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2022-2022</p>
+    </form>
+</main>
+{% endblock %}
