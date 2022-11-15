@@ -89,6 +89,14 @@ async def modify_hosts(hosts: Hosts, current_user: User = Depends(get_current_ac
     if not replys:
         replys = 'Error: not reply from any of hosts'
     return replys
+@app.get("/hosts")
+async def read_hosts(current_user: User = Depends(get_current_active_user)):
+    cmd = 'cat /etc/hosts'
+    replys = await survey.sendSurvey(who=['all'], do='cmd', survey=cmd)
+    if not replys:
+        replys = 'Error: not reply from any of hosts'
+    return replys
+
 
 if __name__ == '__main__':
     uvicorn.run("web:app", host="0.0.0.0", port=os.environ.get('WEB_PORT', 7787))
